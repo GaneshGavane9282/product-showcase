@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import Icon from './Icon';
 import '../styles/pagination.scss';
 
 interface PaginationProps {
@@ -6,18 +7,6 @@ interface PaginationProps {
   totalPages: number;
   onPageChange: (page: number) => void;
 }
-
-const ChevronLeftIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="15 18 9 12 15 6" />
-  </svg>
-);
-
-const ChevronRightIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
 
 const Pagination = memo(({ currentPage, totalPages, onPageChange }: PaginationProps) => {
   const getPageNumbers = () => {
@@ -65,7 +54,7 @@ const Pagination = memo(({ currentPage, totalPages, onPageChange }: PaginationPr
         disabled={currentPage === 1}
         aria-label="Previous page"
       >
-        <ChevronLeftIcon />
+        <Icon name="chevron-left" size="md" />
         Prev
       </button>
 
@@ -97,7 +86,7 @@ const Pagination = memo(({ currentPage, totalPages, onPageChange }: PaginationPr
         aria-label="Next page"
       >
         Next
-        <ChevronRightIcon />
+        <Icon name="chevron-right" size="md" />
       </button>
     </nav>
   );

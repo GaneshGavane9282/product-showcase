@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Icon from "./Icon";
 import "../styles/navbar.scss";
 
 interface NavbarProps {
@@ -12,68 +13,93 @@ const Navbar = ({
   onShowFavorites,
   showingFavorites,
 }: NavbarProps) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  const categories = ["Electronics", "Fashion", "Home", "Sports", "Books"];
+
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <div className="navbar-brand">
-          <div className="navbar-logo">
-            <svg
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="40" height="40" rx="8" fill="currentColor" />
-              <text
-                x="50%"
-                y="62%"
-                text-anchor="middle"
-                fill="white"
-                font-size="22"
-                font-weight="700"
-                font-family="Arial, sans-serif"
-              >
-                P
-              </text>
-            </svg>
+    <nav className="flipkart-navbar">
+      {/* Top Bar */}
+      <div className="navbar-top">
+        <div className="navbar-container">
+          {/* Logo */}
+          <div className="navbar-brand">
+            <div className="navbar-logo">
+              <Icon name="logo" size="lg" />
+            </div>
+            <div className="navbar-branding">
+              <span className="brand-name">ShopHub</span>
+              <span className="brand-tagline">Explore Plus</span>
+            </div>
           </div>
-          <span className="navbar-title">ShopHub</span>
-        </div>
 
-        <div className="navbar-actions">
-          <button
-            className={`navbar-favorites ${showingFavorites ? "active" : ""}`}
-            onClick={onShowFavorites}
-            title="Liked Products"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill={showingFavorites ? "currentColor" : "none"}
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-            {favorites.length > 0 && (
-              <span className="favorites-badge">{favorites.length}</span>
+          {/* Search Bar */}
+          <div className={`search-container ${isSearchFocused ? "focused" : ""}`}>
+            <Icon name="search" className="search-icon" size="md" />
+            <input
+              type="text"
+              placeholder="Search for products, brands, and more"
+              className="search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setIsSearchFocused(true)}
+              onBlur={() => setIsSearchFocused(false)}
+            />
+            {searchQuery && (
+              <button
+                className="search-clear"
+                onClick={() => setSearchQuery("")}
+              >
+                <Icon name="close" size="md" />
+              </button>
             )}
-            <span className="favorites-label">Liked</span>
-          </button>
+          </div>
 
-          <div className="navbar-profile">
-            <button className="profile-button">
-              <div className="profile-avatar">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </div>
-              <span className="profile-name">Guest User</span>
+          {/* Right Actions */}
+          <div className="navbar-actions">
+            <button className="login-btn">
+              <Icon name="user" size="lg" />
+              <span>Login</span>
             </button>
+
+            <button className="seller-btn">
+              <Icon name="briefcase" size="lg" />
+              <span>Become a Seller</span>
+            </button>
+
+            <button
+              className={`cart-btn ${showingFavorites ? "active" : ""}`}
+              onClick={onShowFavorites}
+              title="Wishlist"
+            >
+              <Icon 
+                name={showingFavorites ? "heart-filled" : "heart"} 
+                size="lg" 
+              />
+              {favorites.length > 0 && (
+                <span className="cart-badge">{favorites.length}</span>
+              )}
+            </button>
+
+            <button className="cart-btn">
+              <Icon name="shopping-cart" size="lg" />
+              <span className="cart-label">Cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Category Bar */}
+      <div className="navbar-bottom">
+        <div className="navbar-container">
+          <div className="categories-menu">
+            {categories.map((category) => (
+              <button key={category} className="category-item">
+                <Icon name="grid" className="category-icon" size="lg" />
+                <span>{category}</span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
