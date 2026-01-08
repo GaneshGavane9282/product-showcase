@@ -1,0 +1,162 @@
+// Filter Bar Styles
+$primary-color: #2563eb;
+$primary-dark: #1d4ed8;
+$secondary-color: #64748b;
+$background-color: #f8fafc;
+$card-background: #ffffff;
+$text-primary: #1e293b;
+$text-secondary: #64748b;
+$border-color: #e2e8f0;
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$transition-base: all 0.2s ease-in-out;
+$border-radius: 12px;
+
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: $card-background;
+  padding: 16px 24px;
+  border-radius: $border-radius;
+  box-shadow: $shadow-md;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+
+  &__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__select {
+    appearance: none;
+    background: $background-color;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 10px 36px 10px 12px;
+    font-size: 0.875rem;
+    color: $text-primary;
+    cursor: pointer;
+    transition: $transition-base;
+    min-width: 160px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+    }
+  }
+
+  &__sort-buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__sort-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: $background-color;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: $text-primary;
+    cursor: pointer;
+    transition: $transition-base;
+
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+
+    &--active {
+      background: $primary-color;
+      border-color: $primary-color;
+      color: white;
+
+      &:hover {
+        background: $primary-dark;
+        color: white;
+      }
+    }
+
+    .arrow {
+      font-size: 0.75rem;
+    }
+  }
+
+  &__results {
+    font-size: 0.875rem;
+    color: $text-secondary;
+
+    span {
+      font-weight: 600;
+      color: $primary-color;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .filter-bar {
+    padding: 12px 16px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: stretch;
+
+    &__group {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &__item {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    &__select {
+      width: 100%;
+      min-width: unset;
+    }
+
+    &__sort-buttons {
+      width: 100%;
+    }
+
+    &__sort-btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    &__results {
+      text-align: center;
+      order: -1;
+    }
+  }
+}
