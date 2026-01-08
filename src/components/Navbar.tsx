@@ -25,9 +25,6 @@ const Navbar = ({
         <div className="navbar-container">
           {/* Logo */}
           <div className="navbar-brand">
-            <div className="navbar-logo">
-              <Icon name="logo" size="lg" />
-            </div>
             <div className="navbar-branding">
               <span className="brand-name">ShopHub</span>
               <span className="brand-tagline">Explore Plus</span>
@@ -63,43 +60,20 @@ const Navbar = ({
               <span>Login</span>
             </button>
 
-            <button className="seller-btn">
-              <Icon name="briefcase" size="lg" />
-              <span>Become a Seller</span>
-            </button>
-
             <button
               className={`cart-btn ${showingFavorites ? "active" : ""}`}
               onClick={onShowFavorites}
               title="Wishlist"
             >
-              <Icon 
-                name={showingFavorites ? "heart-filled" : "heart"} 
-                size="lg" 
+              <Icon
+                name={showingFavorites ? "heart-filled" : "heart"}
+                size="lg"
               />
               {favorites.length > 0 && (
                 <span className="cart-badge">{favorites.length}</span>
               )}
             </button>
-
-            <button className="cart-btn">
-              <Icon name="shopping-cart" size="lg" />
-              <span className="cart-label">Cart</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Category Bar */}
-      <div className="navbar-bottom">
-        <div className="navbar-container">
-          <div className="categories-menu">
-            {categories.map((category) => (
-              <button key={category} className="category-item">
-                <Icon name="grid" className="category-icon" size="lg" />
-                <span>{category}</span>
-              </button>
-            ))}
+            <span className="cart-label">Wishlist Cart</span>
           </div>
         </div>
       </div>

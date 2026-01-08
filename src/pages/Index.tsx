@@ -184,18 +184,20 @@ const Index = () => {
         showingFavorites={showFavorites}
       />
 
+      <FilterBar
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        selectedRating={selectedRating}
+        onRatingChange={setSelectedRating}
+        sortOrder={sortOrder}
+        onSortChange={setSortOrder}
+        totalProducts={products.length}
+        filteredCount={filteredProducts.length}
+      />
+
+
       <main className="main-content">
-        <FilterBar
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-          selectedRating={selectedRating}
-          onRatingChange={setSelectedRating}
-          sortOrder={sortOrder}
-          onSortChange={setSortOrder}
-          totalProducts={products.length}
-          filteredCount={filteredProducts.length}
-        />
 
         {paginatedProducts.length > 0 ? (
           <section className="products-grid">
